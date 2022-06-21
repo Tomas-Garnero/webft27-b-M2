@@ -56,6 +56,11 @@ ToDo.prototype.completeToDo = function() {
 
 function buildToDo(todo, index) {
 
+  let check = document.createElement("checkbox");
+  check.id = index;
+  check.addEventListener("click", completeToDo);
+  check.className = "completeCheckbox";
+
   let toDoShell = document.createElement("div");
   toDoShell.className = "toDoShell";
 
@@ -65,8 +70,10 @@ function buildToDo(todo, index) {
 
   if (todo.complete) {
     toDoText.className = "completeText";
+    check.checked = true;
   }
 
+  toDoShell.appendChild(check);
   toDoShell.appendChild(toDoText);
   // <div class="toDoShell">
   //  <span id=index class="completeText">Comprar tomate</span>  
