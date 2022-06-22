@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<style media="screen">
+    .buttonComun {
+    color: white;
+    background-color: red;
+    border-radius: 5px;
+    }
+
+    body {
+        background-color: pink;
+    }
+
+    @media screen and (max-width: 900px){
+        body{
+            background-color: green;
+        }
+        button{
+            background-color: black;          /* no lo toma.. hay q ver porque */
+        }
+    }
+    @media screen and (max-width: 600px){
+        body{
+            background-color: blue;
+        }
+    }
+
+    .sq{
+        border: 2px solid black;
+    }
+</style>
+<body>
+<button type="button" class="buttonComun">Boton Común</button>
+<button class="btn btn-danger">Boton Bootstrap</button>
+<div class="row">
+    <div class="col-sm-3 sq">Col 1</div>
+    <div class="col-sm-3 sq">Col 2</div>
+    <div class="col-sm-3 sq">Col 3</div>
+    <div class="col-sm-3 sq">Col 4</div>
+</div>
+</body>
+</html>
