@@ -8,6 +8,42 @@
 </head>
 
 <body>
+  <div>
+    <button class="all">Trae todos los "pedidos"</button>
+    <button class="pedidos">Consultar pedidos</button>
+    <input name= "index" type="text">
+    <button class="pedido">Consulta el "pedido" indicado</button>
+  </div>
+  <script>
+    // Es lo mismo que hacer document.querySelector(".pedidos")
+    $(".pedidos").click(function(){           // pedidos -> boton, click -> acción, funcion -> consecuencia
+      $.get("https://jsonplaceholder.typicode.com/posts", function(response){  // get -> acción, https -> a donde se consultará, function -> respuesta que se alojara en el callback y se llamara response
+        console.log(response);
+        response.forEach(e => $(`<div id="${e.id}">
+                                    <p>Title: ${e.title}</p>
+                                    <p>Body: ${e.body}</p>
+                                  </div>`).appendTo("body"))
+      })
+    })
+
+    $(".pedido").click(function(){
+      let input = $("input");
+      console.log(input);
+      console.log([0]);                   // <input name= "index" type="text">
+      console.log(input[0].value); 
+      $.get(`https://jsonplaceholder.typicode.com/posts/${input[0].value}`, function(response){
+        console.log(response);
+        $(`<div id="${response.id}">
+              <p>Title: ${response.title}</p>
+              <p>Body: ${response.body}</p>
+            </div>`).appendTo("body");
+      })
+      input[0].value = "";
+    })
+  </script>
+</body>
+
+<!-- <body>
   <div id='respuesta'>
   </div>
   <button class='boton'>AJAX!</button>
@@ -28,6 +64,6 @@
 
     });
   </script>
-</body>
+</body> -->
 
 </html>
