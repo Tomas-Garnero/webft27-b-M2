@@ -1,11 +1,11 @@
-(function () {
+// (function () {
 
-  window.EventEmitter = EventEmitter;
+  window.EventEmitter = EventEmitter;  // es lo que estamos exportando
 
-  // our EventEmitter constructor function
-  function EventEmitter () {
-    this.subscribers = {};
-  }
+  // our EventEmitter constructor function       // ES6
+  function EventEmitter () {               // export function EventEmitter() {
+    this.subscribers = {};                 //     this.subscribers = {};
+  }                                        // }
 
   // To be used like:
   // instanceOfEE.on('touchdown', cheerFn);
@@ -43,4 +43,6 @@
 
   };
 
-})();
+  module.export = EventEmitter;
+
+// })();
