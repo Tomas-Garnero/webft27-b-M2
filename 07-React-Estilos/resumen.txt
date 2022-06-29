@@ -1,0 +1,42 @@
+1. Legacy
+import "archivo.css" -> definia estilos de forma global
+al definir estilos de forma global -> corriamso el riesgo de que se nos pisen los estilos
+Se producian colisiones
+Y ademas no estamos componentizando -> vamos un poco en contra de la filosofia de React (osea, trabajar con 
+componentes de forma individual para luego reutlizarlos)
+Si no trabajo con npx -> hay que configurar Webpack
+
+
+2. Inline Style
+- No necesitamos configurar Webpack
+- Perdemos los pseudos (ejemplo hover)
+- Tenemos un atributo, o prop, style => {prop: valor}, pero no puede tener -, por lo tanto
+debemos usar camelCase
+- Me quedaria asi: const obj = {backgroundColor: green, color: white} 
+-                  <Producto style={obj}/>
+
+
+3. CSS Modules
+- Si no uso npx -> configurar Webpack
+        - Si uso npx, los archivos tienen que tener extension .module.css -> local
+                                                              .css -> global
+- Lo mejor de los dos mundos, podemos definir css local y css global
+- import s from "./archivo.module.css"
+-       s = {clases definidas}
+-       s.nombredelaclase
+- <Producto className={s.nombredelaclase} /> -> para una sola clase
+- <Producto className={`${s.nombredelaclase} ${s.otraclase}`} /> -> para mas clases
+- Define un hash unico para cada clase -> por lo que genera estilos locales
+
+
+4. Styled components
+- Es un nuevo paradigma
+- Generamos componentes estilados / elementos estilados
+- Los puedo exportar e importar ademas de reutilizarlos
+- Puedo generar estilso globales 
+- Los invoco como si fuese un tag normal
+- <ComponenteEstilado>
+-   <h1>Hola</h1>
+- </ComponenteEstilado>
+
+
