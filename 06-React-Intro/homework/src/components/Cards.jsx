@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from "./Card";
+import s from "./Styles/Cards.module.css"
 
 export default function Cards(props) {
   // props = {cities}
@@ -9,7 +10,7 @@ export default function Cards(props) {
   }
 
   return(
-    <div>
+    <div className={s.container}>
       {
         props.cities && props.cities.map(city => (
           <Card 
