@@ -27,6 +27,44 @@ Los formularios son muy útiles en cualquier aplicacion WEB. En React tenemos qu
 
 En React tenemos dos tipos de componentes para crear nuestro Form: `Controlled Components` y `Uncontrolled Components`.
 
+### - Controlled
+Los valores de los inputs están bindeados al estado del Componente.
+
+* Esta es la forma recomendada por el equipo de React.
+* Sigue los patrones de React.
+* Es más predecible.
+
+### - Uncontrolled
+Sacas el valor del DOM.
+
+* Fácil de hacer, no hay que aprender nada nuevo.
+* Lo que se muestra en el input no lo podemos controlar.
+* Es menos predecible.
+
+## Formularios - Importancia de Key
+
+```javascript
+function Ejemplo({lang}) {
+  if (lang === 'hun') {
+    return (
+      <form>
+        <input key="lastName" type="text" placeholder="Vezetéknév" name="lastName"/>
+        <input key="firstName" type="text" placeholder="Keresztnév" name="firstName"/>
+        <input key="middleInitial" type="text" placeholder="KB" style={{width: 30}} name="middleInitial"/>
+      </form>
+    )
+  }
+
+  return (
+    <form>
+      <input key="firstName" type="text" placeholder="First Name" name="firstName"/>
+      <input key="middleInitial" type="text" placeholder="MI" style={{width: 30}} name="middleInitial"/>
+      <input key="lastName" type="text" placeholder="Last Name" name="lastName"/>
+    </form>
+  );
+}
+```
+
 ## Componentes Controlados
 
 Como sabemos, el estado en React es mutable, y lo mantenemos dentro del componente. En un componente controlado, que renderiza el Formulario, tambien controla lo que sucede con el. Es decir que a medida que cambien los valores del Form, el componente guarda esos valores en su state. Aqui vemos un pequeño ejemplo:

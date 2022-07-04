@@ -4,22 +4,26 @@ import React, { useState } from 'react';
 
 function DinamicInputs() {  
   const modeloFamiliar = { nombre: '' };
-  const [familiar, setFamiliar] = useState([
-    { ...modeloFamiliar },
-  ]);
+
+  const [familiar, setFamiliar] = useState([]);
+    // familiar = {nombre: ""}
 
   const [persona, setPersona] = useState({
     nombre: '',
   });
+    // persona ={nombre: ""}
 
   const agregaFamiliar = () => {
-      setFamiliar([...familiar, { ...modeloFamiliar }]);
+      setFamiliar([...familiar, { ...persona }]);
   };
+    // familiar = [familiar, {}]
 
   const handlePersonaChange = (e) => setPersona({
     ...persona,
-    [e.target.name]: e.target.value,
+    [e.target.name]: e.target.value,  // nombre: "Tomas"
   });
+    // una copia del objeto entero de persona, y sobreescribi el valor entre []
+    // en este caso seria [name]: "Tomas" 
 
   const handleFamiliarChange = (e) => {
     const familiares = [...familiar];
