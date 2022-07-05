@@ -33,7 +33,7 @@ Redux es una librería que nos va a ayudar a mantener el estado _global_ de nues
 
 > Podemos usar Redux fuera de React, y React sin redux también. Pero ambas funcionan muy bien juntas, por esto la comunidad las adoptó rápidamente para usarlas juntas.
 
-Si bien, podemos crear _containers_ que mantengan el estado estado de sus _childrens_, lo que termina ocurriendo es que los Componentes _presentacionales_ terminan demasiado acoplados a los _containers_, bajando su _resusabilidad_. Otro tema, es que en estos _containers_ vamos a tener que escribir funciones que manejen el estado de varios Componentes, haciendo que este archivo se convierta en inmanejable de forma rápida. Justamente, `Redux` nos va a ayudar a resolver estos problemas con el paradigma que implementa.
+Si bien, podemos crear _containers_ que mantengan el estado de sus _childrens_, lo que termina ocurriendo es que los Componentes _presentacionales_ terminan demasiado acoplados a los _containers_, bajando su _resusabilidad_. Otro tema, es que en estos _containers_ vamos a tener que escribir funciones que manejen el estado de varios Componentes, haciendo que este archivo se convierta en inmanejable de forma rápida. Justamente, `Redux` nos va a ayudar a resolver estos problemas con el paradigma que implementa.
 
 ## Los tres principios de Redux
 
@@ -43,7 +43,7 @@ Si bien, podemos crear _containers_ que mantengan el estado estado de sus _child
 
 >El __estado__ de toda tu aplicación está guardado en un árbol en una sola __store__.
 
-Esto hace que sea fácil crear apps universales, ya que el _estado_ de tu servidor puede ser _serializado_ fácilmente a todos los clientes sin efuerzo extra. Además hace que sea más fácil _debuggear_ e _inspeccionar_ tu aplicación.
+Esto hace que sea fácil crear apps universales, ya que el _estado_ de tu servidor puede ser _serializado_ fácilmente a todos los clientes sin esfuerzo extra. Además hace que sea más fácil _debuggear_ e _inspeccionar_ tu aplicación.
 
 ```javascript
 console.log(store.getState())
