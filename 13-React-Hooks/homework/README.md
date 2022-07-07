@@ -87,7 +87,7 @@ Como vemos, a cada state le pasamos nuestro valor inicial como parametro a nuest
 
 ### Paso 4
 
-Comencemos a pasarle los valores iniciales del state a nuestro HTML. En lugar de pasar a mano segundos. Pasamos nuestro state `segundos`, en el boton Inicio, usamos `activo` para cambiar entre Inicio y Pausa, tambien usaremos ese state para cambiar las clases. Por ultimo en el boton `Contador` y en nuestro imput usamos el state `tipo` para mostrar el input si mi `tipo` es 'Cuenta Regresiva'
+Comencemos a pasarle los valores iniciales del state a nuestro HTML. Een lugar de pasar a mano segundos, pasamos nuestro state `segundos`. En el boton Inicio, usamos `activo` para cambiar entre Inicio y Pausa, y tambien usaremos ese state para cambiar las clases. Por ultimo en el boton `Contador` y en nuestro imput usamos el state `tipo` para mostrar el input si mi `tipo` es 'Cuenta Regresiva'
 
 
 ```javascript
@@ -124,6 +124,7 @@ function toggle() {
 }
 ```
 Aca estamos llamando a la function setActivo y le pasamos nuestro nuevo estado, en este caso sera el valor contrario que tenca `activo` en ese momento.
+
 Agregamos una funcion para resetear nuestro state `segundos` y `activo`. La llamamos reset.
 
 ```javascript
@@ -132,7 +133,9 @@ function reset() {
   setActivo(false);
 }
 ```
-Al ejecutarse esta funcion volvemos a nuestros valores iniciales. Por ultimo, una funcion para cambiar entre 'Contador' y 'Cuenta Regresiva'.
+Al ejecutarse esta funcion volvemos a nuestros valores iniciales. 
+
+Por ultimo, una funcion para cambiar entre 'Contador' y 'Cuenta Regresiva'.
 
 ```javascript
 function cambioTipo() {

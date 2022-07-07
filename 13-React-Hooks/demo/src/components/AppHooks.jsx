@@ -3,10 +3,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import { saveName } from '../actions';
 
 export default function AppHooks() {
+  // como se representa en un componente de clase?
+
+  // constructor(props) {super(props); this.state = {name: "Hooks", width: window.innerWidth}}
+  // useState -> definir estados LOCALES
   const [name, setName] = useState('Hooks');
   const [width, setWidth] = useState(window.innerWidth)
 
-  const dispatch = useDispatch()
+  // como podemso remplazar el connect con hooks 
+  // useDispatch -> store.dispatch()
+  // esto viene a ser como  connect(mapStateToProps, null)(AppHooks)
+  const dispatch = useDispatch() // -> dispatch se va a encargar de despachar las acciones / action creators
+  // dispatch(getMovies(name))
+
+  // useSelector -> mapStateToProps
+  // function mapStateToProps(state){
+  //    return {}
+  //      nameRedux: state.name
+  //    }
+  // }
   const nameRedux = useSelector(state => state.name)
   
   useEffect(() => {

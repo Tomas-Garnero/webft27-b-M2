@@ -40,20 +40,155 @@ function Example() {
   );
 }
 ```
+## Hooks de Estado: useState()
+
+Permite guardar estados en componentes funcionales.
+
+```javascript
+import React, { useState } from 'react';
+
+function Example() {
+  const [count, setCount] = useState(0);
+  ...
+  function increment() {
+    setCount(count + 1)
+  }
+  return (
+    <div>
+      <button onClick={increment}>Suma 1</button>
+      <p>{count}</p>
+    </div>
+    ...
+  )
+}
+```
+`useState()` es una función que devuelve un arreglo con dos valores. El primero es una
+variable con el valor del estado y el segundo valor es una función se usa para
+actualizar el estado. Acepta un nuevo valor de estado y sitúa en la cola una nueva
+renderización del componente.
+
+## Hook de Efecto: useEffect()
+
+Permite realizar efectos secundarios en componentes funcionales. Efectos secuendarios pueden ser: Traer data con AJAX, cambiar el DOM manualmente, suscribrise a algo, etc..
+
+```javascript
+function Example() {
+  const [count, setCount] = useState(0);
+  ...
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `You clicked ${count} times`;
+  });
+  ...
+}
+```
+De forma predeterminada, React ejecuta los efectos después del primer renderizado y después de cada actualización.
+
+## Hook de Efecto: componentDidMount() con useEffect()
+
+```javascript
+function Example() {
+  const [count, setCount] = useState(0);
+  ...
+  useEffect(() => {
+    // Update the document title using the browser API
+    console.log("this component has been mounted");
+  }, []);
+  ...
+}
+```
+Podemos realizar un efecto que actúe de manera similar al método `componentDidMount()` de los class component.
+
+## Hook de Efecto: componentDidUpdate() con useEffect()
+
+```javascript
+function Example() {
+  const [count, setCount] = useState(0);
+  ...
+  useEffect(() => {
+    // Update the document title using the browser API
+    console.log("First time or the count state was updated");
+  }, [count]);
+  ...
+}
+```
+Podemos realizar un efecto que actúe de manera similar al método `componentDidUpdate()` de los class component.
+
+## Hook de Efecto: componentWillUnmount() con useEffect()
+
+```javascript
+function Example() {
+  const [count, setCount] = useState(0);
+  ...
+  useEffect(() => {
+    // Update the document title using the browser API
+    return () => console.log("this component has been removed");
+  }, []);
+  ...
+}
+```
+Podemos realizar un efecto que actúe de manera similar al método `componentWillUnmount()` de los class component.
+
+## Hook useReducer()
+
+```javascript
+const initialState = {count: 0};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    default:
+      throw new Error();
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+    </>
+  );
+}
+```
+
+## Hook useRef()
+
+```javascript
+function TextInputWithFocusButton() {
+  const inputEl = useRef(null);
+  const onButtonClick = () => {
+    // `current` apunta al elemento de entrada de texto montado
+  inputEl.current.focus();
+  };
+  return (
+    <>
+      <input ref={inputEl} type="text" />
+      <button onClick={onButtonClick}>Focus the input</button>
+    </>
+  );
+}
+```
+IMPORTANTE: podemos manipular el DOM manualmente con este hook, pero es desaconsejado hacerlo.
 
 ## Motivación
 
 Los Hooks resuelven una amplia variedad de problemas aparentemente desconectados en React que hemos encontrado durante más de cinco años de escribir y mantener decenas de miles de componentes. Ya sea que estés aprendiendo React, usándolo diariamente o incluso prefieras una librería diferente con un modelo de componentes similar, es posible que reconozcas algunos de estos problemas.
 
-### Es difícil reutilizar la lógica de estado entre componentes
+## Es difícil reutilizar la lógica de estado entre componentes
 
-React no ofrece una forma de “acoplar” comportamientos re-utilizables a un componente (Por ejemplo, al conectarse a un store). Si llevas un tiempo trabajando con React, puedes estar familiarizado con patrones como render props y componentes de orden superior que tratan resolver esto. Pero estos patrones requieren que reestructures tus componentes al usarlos, lo cual puede ser complicado y hacen que tu código sea más difícil de seguir. Si observas una aplicación típica de React usando React DevTools, Lo más probable es que encuentres un “wrapper hell” de componentes envueltos en capas de providers, consumers, componentes de orden superior, render props, y otras abstracciones. Aunque podemos filtrarlos usando las DevTools, esto apunta a un problema aún más profundo: React necesita una mejor primitiva para compartir lógica de estado.
+React no ofrece una forma de “acoplar” comportamientos re-utilizables a un componente (Por ejemplo, al conectarse a un store). Si llevas un tiempo trabajando con React, puedes estar familiarizado con patrones como render props y componentes de orden superior que tratan resolver esto. Pero estos patrones requieren que reestructures tus componentes al usarlos, lo cual puede ser complicado y hacen que tu código sea más difícil de seguir. Si observas una aplicación típica de React usando React DevTools, lo más probable es que encuentres un “wrapper hell” de componentes envueltos en capas de providers, consumers, componentes de orden superior, render props, y otras abstracciones. Aunque podemos filtrarlos usando las DevTools, esto apunta a un problema aún más profundo: React necesita una mejor primitiva para compartir lógica de estado.
 
 Con Hooks, puedes extraer lógica de estado de un componente de tal forma que este pueda ser probado y re-usado independientemente. Los Hooks te permiten reutilizar lógica de estado sin cambiar la jerarquía de tu componente. Esto facilita el compartir Hooks entre muchos componentes o incluso con la comunidad.
 
 Discutiremos esto más a fondo en Construyendo tus propios Hooks.
 
-### Los componentes complejos se vuelven difíciles de entender
+## Los componentes complejos se vuelven difíciles de entender
 
 A menudo tenemos que mantener componentes que empiezan simples pero con el pasar del tiempo crecen y se convierten en un lío inmanejable de multiples lógicas de estado y efectos secundarios. Cada método del ciclo de vida a menudo contiene una mezcla de lógica no relacionada entre sí. Por ejemplo, los componentes pueden realizar alguna consulta de datos en el componentDidMount y componentDidUpdate. Sin embargo, el mismo método componentDidMount también puede contener lógica no relacionada que cree escuchadores de eventos, y los limpie en el componentWillUnmount. El código relacionado entre sí y que cambia a la vez es separado, pero el código que no tiene nada que ver termina combinado en un solo método. Esto hace que sea demasiado fácil introducir errores e inconsistencias.
 
@@ -63,7 +198,7 @@ Para resolver esto, Hooks te permite dividir un componente en funciones más peq
 
 Discutiremos esto más a fondo en Usando el Hook de efecto.
 
-### Las clases confunden tanto a las personas como a las máquinas
+## Las clases confunden tanto a las personas como a las máquinas
 
 Además de dificultar la reutilización y organización del código, hemos descubierto que las clases pueden ser una gran barrera para el aprendizaje de React. Tienes que entender cómo funciona this en JavaScript, que es muy diferente a cómo funciona en la mayoría de los lenguajes. Tienes que recordar agregar bind a tus manejadores de eventos. Sin inestables propuestas de sintaxis, el código es muy verboso. Las personas pueden entender props, el estado, y el flujo de datos de arriba hacia abajo perfectamente, pero todavía tiene dificultades con las clases. La distinción entre componentes de función y de clase en React y cuándo usar cada uno de ellos lleva a desacuerdos incluso entre los desarrolladores experimentados de React.
 
